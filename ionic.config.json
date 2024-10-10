@@ -1,0 +1,7 @@
+{
+  "name": "my-repositories-test",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
