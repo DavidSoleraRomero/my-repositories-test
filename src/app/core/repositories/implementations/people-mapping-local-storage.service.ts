@@ -7,7 +7,7 @@ import { PersonRaw } from '../../models/person-raw';
 @Injectable({
   providedIn: 'root'
 })
-export class PeopleMappingHttpService implements IBaseMapping<Person> {
+export class PeopleMappingLocalStorageService implements IBaseMapping<Person> {
 
   constructor() { }
 

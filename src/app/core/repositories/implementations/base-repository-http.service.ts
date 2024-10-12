@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { IBaseRepository } from '../interfaces/base-repository.interface';
 import { Model } from '../../models/model';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { API_URL_TOKEN, REPOSITORY_MAPPING_TOKEN, RESOURCE_NAME_TOKEN } from '../repository.tokens';
 import { Paginated } from '../../models/paginated';
@@ -20,23 +20,46 @@ export class BaseRepositoryHttpService<T extends Model> implements IBaseReposito
   ) { }
 
   getAll(page: number, pageSize: number): Observable<Paginated<T>> {
-    throw new Error('Method not implemented.');
+    return this.http.get<T>(`${this.apiURL}/${this.resource}`).pipe(
+      map((res) => {
+        return this.mapping.getPaginated(page, pageSize, 0, res);
+      })
+    );
   }
 
   getOne(id: string): Observable<T | null> {
-    throw new Error('Method not implemented.');
+    return this.http.get<T>(`${this.apiURL}/${this.resource}/${id}`).pipe(
+      map((res) => {
+        return this.mapping.getOne(res);
+      })
+    );
   }
 
   create(element: T): Observable<T> {
-    throw new Error('Method not implemented.');
+    return this.http.post<T>(`${this.apiURL}/${this.resource}`, element).pipe(
+      map(res => {
+          return this.mapping.getCreated(res)
+        }
+      )
+    );
   }
 
   update(id: string, element: T): Observable<T> {
-    throw new Error('Method not implemented.');
+    return this.http.put<T>(`${this.apiURL}/${this.resource}/${id}`, element).pipe(
+      map(res => {
+          return this.mapping.getUpdated(res)
+        }
+      )
+    );
   }
 
   delete(id: string): Observable<T> {
-    throw new Error('Method not implemented.');
+    return this.http.delete<T>(`${this.apiURL}/${this.resource}/${id}`).pipe(
+      map(res => {
+          return this.mapping.getDeleted(res)
+        }
+      )
+    );
   }
 
 }

@@ -11,7 +11,7 @@ export const REPOSITORY_TOKEN = new InjectionToken<IBaseRepository<any>>("RESOUR
 export const PEOPLE_REPOSITORY_TOKEN = new InjectionToken<IPeopleRepository>("PEOPLE_RESOURCE_TOKEN");
 
 export const API_URL_TOKEN = new InjectionToken<string>("API_URL_TOKEN");
-export const PEOPLE_API_URL = new InjectionToken<string>("PEOPLE_API_URL");
+export const PEOPLE_API_URL_TOKEN = new InjectionToken<string>("PEOPLE_API_URL_TOKEN");
 
 export const REPOSITORY_MAPPING_TOKEN = new InjectionToken<IBaseMapping<any>>("REPOSITORY_MAPPING_TOKEN");
 export const PEOPLE_REPOSITORY_MAPPING_TOKEN = new InjectionToken<IBaseMapping<Person>>("PEOPLE_REPOSITORY_MAPPING_TOKEN");
