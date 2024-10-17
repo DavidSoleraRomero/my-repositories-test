@@ -11,6 +11,7 @@ import { PeopleMappingHttpService } from './core/repositories/implementations/pe
 import { PeopleRepositoryFactory } from './core/repositories/repository.factory';
 import { provideHttpClient } from '@angular/common/http';
 import { PeopleMappingLocalStorageService } from './core/repositories/implementations/people-mapping-local-storage.service';
+import { PeopleMappingJsonServerService } from './core/repositories/implementations/people-mapping-json-server.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,17 +25,17 @@ import { PeopleMappingLocalStorageService } from './core/repositories/implementa
     // Resources
     {
       provide: PEOPLE_RESOURCE_NAME_TOKEN,
-      useValue: "people"
+      useValue: "persons"
     },
     // APIs urls
     {
       provide: PEOPLE_API_URL_TOKEN,
-      useValue: "https://randomuser.me/api/?results=100"
+      useValue: "http://localhost:3000"
     },
     // Repositories
     {
       provide: PEOPLE_REPOSITORY_MAPPING_TOKEN,
-      useClass: PeopleMappingLocalStorageService
+      useClass: PeopleMappingJsonServerService
     },
     PeopleRepositoryFactory,
   ],
