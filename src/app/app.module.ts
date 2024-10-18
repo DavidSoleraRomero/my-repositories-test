@@ -7,10 +7,8 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PEOPLE_API_URL_TOKEN, PEOPLE_REPOSITORY_MAPPING_TOKEN, PEOPLE_RESOURCE_NAME_TOKEN } from './core/repositories/repository.tokens';
-import { PeopleMappingHttpService } from './core/repositories/implementations/people-mapping-http.service';
 import { PeopleRepositoryFactory } from './core/repositories/repository.factory';
 import { provideHttpClient } from '@angular/common/http';
-import { PeopleMappingLocalStorageService } from './core/repositories/implementations/people-mapping-local-storage.service';
 import { PeopleMappingJsonServerService } from './core/repositories/implementations/people-mapping-json-server.service';
 
 @NgModule({

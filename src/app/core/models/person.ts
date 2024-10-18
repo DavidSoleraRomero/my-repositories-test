@@ -4,7 +4,7 @@ export interface Person extends Model {
     name: string,
     surnames: string,
     age: number,
-    picture?:{
+    picture?:{  
         large:string,
         thumbnail:string
     }
