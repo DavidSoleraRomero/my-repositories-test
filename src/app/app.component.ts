@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+  public appPages = [
+    { title: 'Home', url: '/home', icon: 'home' },
+    { title: 'Personas', url: '/people', icon: 'people' },
+    { title: 'Grupos', url: '/groups', icon: 'people-circle' },
+  ];
+  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel'];
   constructor() {}
 }

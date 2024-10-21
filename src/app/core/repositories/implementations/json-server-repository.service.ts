@@ -1,5 +1,4 @@
 import { Inject, Injectable } from '@angular/core';
-import { IBaseRepository } from '../interfaces/base-repository.interface';
 import { Model } from '../../models/model';
 import { map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';

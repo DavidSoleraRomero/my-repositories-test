@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { IBaseMapping } from '../interfaces/base-mapping.interface';
-import { Person } from '../../models/person';
-import { Paginated } from '../../models/paginated';
+import { IBaseMapping } from '../../interfaces/base-mapping.interface';
+import { Person } from '../../../models/person';
+import { Paginated } from '../../../models/paginated';
 
 interface PersonRaw {
   id: string,
@@ -42,7 +42,7 @@ export class PeopleMappingJsonServerService implements IBaseMapping<Person> {
       id: data.id,
       name: data.name,
       surnames: data.surnames,
-      age: 0,
+      age: Math.floor(Math.random() * 34 + 18),
       picture: data.picture? {
         large: data.picture?.large?? "", 
         thumbnail: data.picture?.thumbnail?? ""
