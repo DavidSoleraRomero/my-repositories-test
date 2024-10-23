@@ -38,6 +38,7 @@ export class BaseRepositoryHttpService<T extends Model> implements IBaseReposito
   create(element: T): Observable<T> {
     return this.http.post<T>(`${this.apiURL}/${this.resource}`, element).pipe(
       map(res => {
+          console.log(res);
           return this.mapping.getCreated(res)
         }
       )

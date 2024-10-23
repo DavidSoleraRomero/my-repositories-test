@@ -1,11 +1,6 @@
 <ion-header>
   <ion-title>
-    <div *ngIf="person">
-      <h1>{{ person?.name }} {{ person?.surnames }}</h1>
-    </div>
-    <div *ngIf="!person">
-      <h1>No se ha encontrado ninguna persona</h1>
-    </div>
+    <h1>Añadir persona</h1>
   </ion-title>
 </ion-header>
 <ion-content>
@@ -32,13 +27,52 @@
     <!-- Edad -->
     <ion-item>
       <ion-label position="floating">Edad</ion-label>
-      <ion-input type="text" formControlName="age"></ion-input>
+      <ion-input type="number" formControlName="age"></ion-input>
     </ion-item>
     <ion-text color="danger" *ngIf="age?.invalid && (age?.dirty || age?.touched)">
-      <p *ngIf="age?.errors?.['required']">La edad es obligatorio.</p>
+      <p *ngIf="age?.errors?.['required']">La edad es obligatoria.</p>
     </ion-text>
 
-    <ion-button expand="full" type="submit" [disabled]="formGroup.invalid">Añadir</ion-button>
+    <!-- Correo electrónico -->
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="text" formControlName="email"></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+      <p *ngIf="email?.errors?.['required']">El correo electrónico es obligatorio.</p>
+      <p *ngIf="email?.errors?.['email']">El formato del correo electrónico es inválido</p>
+    </ion-text>
+
+    <!-- Género -->
+    <ion-item>
+      <ion-label position="floating">Género</ion-label>
+      <ion-input type="text" formControlName="gender"></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="gender?.invalid && (gender?.dirty || gender?.touched)">
+      <p *ngIf="gender?.errors?.['required']">El género es obligatorio.</p>
+    </ion-text>
+
+    <!-- Código del país -->
+    <ion-item>
+      <ion-label position="floating">Código del país</ion-label>
+      <ion-input type="text" formControlName="countryCode"></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="countryCode?.invalid && (countryCode?.dirty || countryCode?.touched)">
+      <p *ngIf="countryCode?.errors?.['required']">El código del país es obligatorio.</p>
+    </ion-text>
+
+    <!-- ID del grupo -->
+    <ion-item>
+      <ion-label position="floating">ID del grupo</ion-label>
+      <ion-select formControlName="groupId" placeholder="Selecciona un ID de grupo">
+        <ion-select-option *ngFor="let group of groupList" [value]="group.id">{{ group.id }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-text color="danger" *ngIf="groupId?.invalid && (groupId?.dirty || groupId?.touched)">
+      <p *ngIf="groupId?.errors?.['required']">El ID de grupo es obligatorio.</p>
+    </ion-text>
+
+    <ion-button expand="full" type="submit" [disabled]="formGroup.invalid">Añadir persona</ion-button>
 
   </form>
 </ion-content>

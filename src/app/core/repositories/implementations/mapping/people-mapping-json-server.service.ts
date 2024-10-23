@@ -11,11 +11,11 @@ interface PersonRaw {
   age?: number,
   gender: string,
   country_code: string,
-  group_id: string,
   picture?:{
       large:string,
       thumbnail:string
-  }
+  },
+  group_id: string,
 }
 
 @Injectable({
@@ -42,11 +42,15 @@ export class PeopleMappingJsonServerService implements IBaseMapping<Person> {
       id: data.id,
       name: data.name,
       surnames: data.surnames,
-      age: Math.floor(Math.random() * 60 + 18),
+      age: data.age?? Math.floor(Math.random() * 60 + 18),
+      email: data.email?? "",
+      gender: data.gender?? "",
+      country_code: data.country_code?? "",
       picture: data.picture? {
         large: data.picture?.large?? "", 
         thumbnail: data.picture?.thumbnail?? ""
       }: undefined,
+      group_id: data.group_id?? ""
     };
   }
 

@@ -7,7 +7,10 @@
 <ion-content [fullscreen]="true">
   <ion-list>
     <ion-item *ngFor="let group of groups$ | async; let i = index">
-      <ion-label class="ion-text-nowrap"> {{group.name}} </ion-label>
+      <ion-label class="ion-text-nowrap"> 
+        {{group.name}} 
+        <p>Group ID {{ group.id }}</p>
+      </ion-label>
     </ion-item>
   </ion-list>
   <div #animatedAvatarContainer class="animated-avatar-container" [ngStyle]="{'display':isAnimating?'block':'none'}">

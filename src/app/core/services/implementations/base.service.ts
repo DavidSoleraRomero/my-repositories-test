@@ -24,6 +24,7 @@ export class BaseService<T extends Model> implements IBaseService<T> {
   }
 
   create(t: T): Observable<T> {
+    t.id = this.randomUuid();
     return this.repository.create(t);
   }
 
@@ -34,4 +35,11 @@ export class BaseService<T extends Model> implements IBaseService<T> {
   delete(id:string): Observable<T> {
     return this.repository.delete(id);
   }
+  
+  private randomUuid(): string {
+    const randomHex = (): string => Math.random().toString(16).slice(2, 6);
+  
+    return `${randomHex()}-${randomHex()}-${randomHex()}-${randomHex()}-${randomHex()}${randomHex()}`;
+  }
+
 }

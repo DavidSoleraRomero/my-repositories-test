@@ -50,7 +50,7 @@ export class PeoplePage implements OnInit {
   }
 
   canCallNext(notify:HTMLIonInfiniteScrollElement | null = null): boolean {
-    return this.totalPages > this.page;
+    return this.totalPages >= this.page;
   }
 
   async openPersonDetail(person: any, index: number) {
@@ -102,7 +102,22 @@ export class PeoplePage implements OnInit {
     });
 
     modal.onDidDismiss().then((data) => {
-      console.log(data);
+      let person: Person = {
+        id: "",
+        name: data.data.name,
+        surnames: data.data.surnames,
+        age: data.data.age,
+        email: data.data.email,
+        gender: data.data.gender,
+        country_code: data.data.countryCode,
+        group_id: data.data.groupId
+      }
+      this.peopleSv.create(person).subscribe({
+        next:(response: Person) => {
+          console.log(response);
+          location.reload()
+        }
+      });
     });
 
     return await modal.present();

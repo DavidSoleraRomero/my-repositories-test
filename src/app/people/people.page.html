@@ -12,8 +12,10 @@
         <img *ngIf="!person.picture" #avatar alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
       </ion-avatar>
       <ion-label class="ion-text-nowrap">
-        <p>ID {{ person.id }}</p>
-        {{person.name}} {{person.surnames}} ({{person.age}} años)
+        <h2>{{ person.name }} {{ person.surnames }} ({{ person.age }} años)</h2>
+        <h2>{{ person.email }}</h2>
+        <p>{{ person.country_code }}, {{ person.gender }}</p>
+        <p>Group ID {{ person.group_id }}</p>
       </ion-label>
     </ion-item>
   </ion-list>

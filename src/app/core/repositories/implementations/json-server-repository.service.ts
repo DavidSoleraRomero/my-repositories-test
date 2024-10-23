@@ -34,6 +34,7 @@ export class JsonServerRepositoryService<T extends Model> extends BaseRepository
   override getAll(page: number, pageSize: number): Observable<Paginated<T>> {
     return this.http.get<PaginatedRaw<T>>(`${this.apiURL}/${this.resource}/?_page=${page}&_per_page=${pageSize}`).pipe(
       map((res) => {
+        console.log(res);
         return this.mapping.getPaginated(page, pageSize, res.pages, res.data);
       })
     );

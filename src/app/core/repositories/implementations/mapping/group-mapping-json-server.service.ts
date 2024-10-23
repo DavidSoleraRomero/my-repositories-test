@@ -4,7 +4,7 @@ import { Paginated } from '../../../models/paginated';
 import { Group } from 'src/app/core/models/group';
 
 interface GroupRaw {
-  id: string,
+  group_id: string,
   name: string
 }
 
@@ -29,7 +29,7 @@ export class GroupMappingJsonServerService implements IBaseMapping<Group> {
 
   getOne(data: GroupRaw): Group {
     return {
-      id: data.id,
+      id: data.group_id,
       name: data.name
     };
   }
