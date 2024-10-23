@@ -11,6 +11,6 @@ export class AppComponent {
     { title: 'Personas', url: '/people', icon: 'people' },
     { title: 'Grupos', url: '/groups', icon: 'people-circle' },
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel'];
+  public labels = [''];
   constructor() {}
 }

@@ -42,7 +42,7 @@ export class PeopleMappingJsonServerService implements IBaseMapping<Person> {
       id: data.id,
       name: data.name,
       surnames: data.surnames,
-      age: Math.floor(Math.random() * 34 + 18),
+      age: Math.floor(Math.random() * 60 + 18),
       picture: data.picture? {
         large: data.picture?.large?? "", 
         thumbnail: data.picture?.thumbnail?? ""

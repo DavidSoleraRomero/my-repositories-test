@@ -11,10 +11,20 @@ import { GroupsRepositoryFactory, PeopleRepositoryFactory } from './core/reposit
 import { provideHttpClient } from '@angular/common/http';
 import { PeopleMappingJsonServerService } from './core/repositories/implementations/mapping/people-mapping-json-server.service';
 import { GroupMappingJsonServerService } from './core/repositories/implementations/mapping/group-mapping-json-server.service';
+import { PersonModalComponent } from './components/person-modal/person-modal.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  declarations: [
+    AppComponent, 
+    PersonModalComponent
+  ],
+  imports: [
+    BrowserModule, 
+    IonicModule.forRoot(), 
+    AppRoutingModule,
+    ReactiveFormsModule
+  ],
   providers: [
     provideHttpClient(),
     { 
@@ -51,6 +61,8 @@ import { GroupMappingJsonServerService } from './core/repositories/implementatio
     PeopleRepositoryFactory,
     GroupsRepositoryFactory,
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [
+    AppComponent
+  ],
 })
 export class AppModule {}
