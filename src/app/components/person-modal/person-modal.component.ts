@@ -14,7 +14,24 @@ export class PersonModalComponent  implements OnInit {
 
   formGroup: FormGroup;
   groupList: Group[] = [];
-  @Input() person:Person | undefined;
+  genderList: string[] = [
+    "Male",
+    "Female",
+    "Other"
+  ];
+  mode:'new'|'edit' = 'new';
+
+  @Input() set person(_person: Person) {
+    if(_person && _person.id) this.mode = 'edit';
+    console.log(_person.group_id)
+    this.formGroup.controls['name'].setValue(_person.name);
+    this.formGroup.controls['surnames'].setValue(_person.surnames);
+    this.formGroup.controls['age'].setValue(_person.age);
+    this.formGroup.controls['email'].setValue(_person.email);
+    this.formGroup.controls['gender'].setValue(_person.gender);
+    this.formGroup.controls['country_code'].setValue(_person.country_code);
+    this.formGroup.controls['group_id'].setValue(_person.group_id);
+  }
 
   constructor(
     private modalController: ModalController,
@@ -25,21 +42,21 @@ export class PersonModalComponent  implements OnInit {
     this.formGroup = this.formBuilder.group({
       name:["", [Validators.required, Validators.minLength(2)]],
       surnames:["", [Validators.required, Validators.minLength(2)]],
-      age: ["", [Validators.required]],
+      age: ["", [Validators.required, Validators.min(0), Validators.max(110)]],
       email: ["", [Validators.required, Validators.email]],
       gender: ["", [Validators.required]],
-      countryCode: ["", [Validators.required]],
-      groupId: ["", [Validators.required]]
+      country_code: ["", [Validators.required]],
+      group_id: ["", [Validators.required]]
     });
 
-    groupsService.getAll(1, 20).subscribe({
+    this.groupsService.getAll(1, 100).subscribe({
       next:(groupListResponse) => {
         this.groupList = groupListResponse.data
       },
       error:(error) => {
         console.log(`GroupService Error: ${error}`)
       }
-    })
+    });
 
   }
 
@@ -47,11 +64,23 @@ export class PersonModalComponent  implements OnInit {
   
   onSubmit() {
     if (this.formGroup.valid) {
-      console.log('Formulario enviado:', this.formGroup.value);
-      this.modalController.dismiss(this.formGroup.value);
-    } else {
-      console.log('Formulario inválido');
-    }
+      if (this.mode == "new") this.modalController.dismiss(this.formGroup.value);
+      else this.modalController.dismiss(this.getDirtyValues(this.formGroup))
+    } 
+    else console.log('Formulario inválido');
+  }
+
+  getDirtyValues(formGroup: FormGroup): any {
+    const dirtyValues: any = {};
+  
+    Object.keys(formGroup.controls).forEach(key => {
+      const control = formGroup.get(key);
+      if (control?.dirty) {
+        dirtyValues[key] = control.value;
+      }
+    });
+  
+    return dirtyValues;
   }
 
   get name() {
@@ -74,12 +103,12 @@ export class PersonModalComponent  implements OnInit {
     return this.formGroup.get('gender');
   }
 
-  get countryCode() {
-    return this.formGroup.get('countryCode');
+  get country_code() {
+    return this.formGroup.get('country_code');
   }
 
-  get groupId() {
-    return this.formGroup.get('groupId');
+  get group_id() {
+    return this.formGroup.get('group_id');
   }
 
 }

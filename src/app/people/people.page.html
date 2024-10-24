@@ -7,16 +7,19 @@
 <ion-content [fullscreen]="true">
   <ion-list>
     <ion-item *ngFor="let person of people$ | async; let i = index">
-      <ion-avatar slot="start">
-        <img *ngIf="person.picture" #avatar alt="Silhouette of a person's head" [src]="person.picture!.thumbnail" />
-        <img *ngIf="!person.picture" #avatar alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-      </ion-avatar>
-      <ion-label class="ion-text-nowrap">
-        <h2>{{ person.name }} {{ person.surnames }} ({{ person.age }} años)</h2>
-        <h2>{{ person.email }}</h2>
-        <p>{{ person.country_code }}, {{ person.gender }}</p>
-        <p>Group ID {{ person.group_id }}</p>
-      </ion-label>
+        <ion-avatar slot="start" (click)="onEditPerson(person)">
+          <img *ngIf="person.picture" #avatar alt="Silhouette of a person's head" [src]="person.picture!.thumbnail" />
+          <img *ngIf="!person.picture" #avatar alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+        </ion-avatar>
+        <ion-label class="ion-text-nowrap" (click)="onEditPerson(person)">
+          <h2>{{ person.name }} {{ person.surnames }} ({{ person.age }} años)</h2>
+          <h2>{{ person.email }}</h2>
+          <p>{{ person.country_code }}, {{ person.gender }}</p>
+          <p>Group ID {{ person.group_id }}</p>
+        </ion-label>
+      <ion-button (click)="deletePerson(person)" slot="end" fill="clear">
+        <ion-icon slot="icon-only" color="danger" name="trash-outline"></ion-icon>
+      </ion-button>
     </ion-item>
   </ion-list>
   <div #animatedAvatarContainer class="animated-avatar-container" [ngStyle]="{'display':isAnimating?'block':'none'}">
